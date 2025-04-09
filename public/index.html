@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Analyzer</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body class="min-h-screen bg-gradient-to-br from-gray-50 to-gray-200 font-['Poppins']">
+    <div class="container mt-2">
+        <div class="text-center mb-2">
+            <h1 class="text-4xl font-bold text-gray-800">Product Analyzer</h1>
+            <p class="text-gray-600">Scan products to check their origin</p>
+        </div>
+        
+        <!-- Camera Feed Container -->
+        <div class="max-w-md mx-auto bg-white/80 backdrop-blur-md border border-white/20 p-6 rounded-2xl mb-8">
+            <div class="relative overflow-hidden rounded-xl shadow-lg mb-6">
+                <video id="cameraFeed" autoplay playsinline class="w-full aspect-[5/8] bg-black rounded-xl shadow-inner"></video>
+                <div class="captured-image-container hidden">
+                    <img id="capturedImage" class="w-full aspect-[5/8] object-cover rounded-xl shadow-inner cursor-pointer hover:opacity-90 transition-opacity" alt="Captured product">
+                </div>
+            </div>
+            
+            <!-- Capture Button -->
+            <button id="captureBtn" class="w-full bg-gradient-to-r from-indigo-500 to-purple-600 hover:from-indigo-600 hover:to-purple-700 text-white font-semibold py-4 px-6 rounded-xl text-lg transition-all duration-300 hover:-translate-y-1 hover:shadow-lg flex items-center justify-center gap-2">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z" />
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z" />
+                </svg>
+                Capture Image
+            </button>
+
+            <!-- Try Another Button -->
+            <button id="retakeBtn" class="w-full bg-gradient-to-r from-indigo-500 to-purple-600 hover:from-indigo-600 hover:to-purple-700 text-white font-semibold py-3 px-6 rounded-xl text-lg transition-all duration-300 hover:-translate-y-1 hover:shadow-lg flex items-center justify-center gap-2 mt-4 hidden">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+                </svg>
+                Try Another
+            </button>
+        </div>
+
+        <!-- Results Area -->
+        <div id="results" class="max-w-md mx-auto bg-white/80 backdrop-blur-md border border-white/20 p-6 rounded-2xl transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hidden">
+            <h2 class="text-2xl font-semibold mb-4 text-gray-800 flex items-center">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                Analysis Results
+            </h2>
+            <div id="resultsContent" class="text-gray-700"></div>
+            
+            <!-- Loading Spinner -->
+            <div id="loadingSpinner" class="hidden">
+                <div class="flex items-center justify-center py-6">
+                    <div class="animate-spin rounded-full h-10 w-10 border-4 border-indigo-500 border-t-transparent"></div>
+                    <span class="ml-3 text-gray-600 font-medium">Analyzing product...</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Error Message -->
+        <div id="errorMessage" class="hidden mt-6 max-w-md mx-auto bg-red-50 border-l-4 border-red-500 p-4 rounded-lg">
+            <div class="flex items-center">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-red-500 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                <span class="text-red-700"></span>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
